@@ -100,12 +100,16 @@ const columns = [
     dataIndex: "Tigger",
   },
   {
-    title: "In Queue for",
+    title: "In Queue for(Days)",
     dataIndex: "Inqueue",
+    sorter: (a, b) => a.Inqueue - b.Inqueue
   },
   {
     title: "Data added on",
     dataIndex: "dataon",
+    onFilter: (value, record) => record.dataon.includes(value),
+    sorter: (a, b) => a.dataon.length - b.dataon.length,
+    sortDirections: ['descend'],
   },
   {
     title: "Previously reviewed",
@@ -125,7 +129,7 @@ const data = [
     user: "Sam Altman",
     risk: "Medium",
     Tigger: "IP Change",
-    Inqueue: "4 days",
+    Inqueue: 4,
     dataon: "12 Oct,2023",
     reviewed: "Yes",
     useremail: "samaltman123@gmail.com",
@@ -136,7 +140,7 @@ const data = [
     user: "Sameer Chaubey",
     risk: "High",
     Tigger: "FIFO",
-    Inqueue: "4 days",
+    Inqueue: 4,
     dataon: "12 Oct,2023",
     reviewed: "No",
     useremail: "sameerchoubey123@gmail.com",
@@ -146,7 +150,7 @@ const data = [
     user: "Adarsh Panikkar",
     risk: "Low",
     Tigger: "IP Change",
-    Inqueue: "5 days",
+    Inqueue: 5,
     dataon: "12 Oct,2023",
     reviewed: "No",
     useremail: "adarsh@onjuno.com",
@@ -157,7 +161,7 @@ const data = [
     user: "Pratik",
     risk: "High",
     Tigger: "FIFO",
-    Inqueue: "5 days",
+    Inqueue: 3,
     dataon: "12 Oct,2023",
     reviewed: "Yes",
     useremail: "pratik3@gmail.com",
@@ -345,13 +349,15 @@ export default function Dashboard() {
           dataSource={data}
           onChange={onChange}
           pagination={false}
+  
           style={{
-            display: "flex",
-            width: "100%",
-            padding: "var(--spacing-space-00, 0px)",
+            'display': "flex",
+            'width': "100%",
+            'padding': "var(--spacing-space-00, 0px)",
             "align-items": "flex-start",
-            gap: "var(--spacing-space-00, 0px)",
+            'gap': "var(--spacing-space-00, 0px)",
             "border-radius": "var(--spacing-space-00, 0px)",
+            
           }}
         />
       </div>
